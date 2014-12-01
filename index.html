@@ -23,42 +23,39 @@
 			margin: 0;
 			padding: 0;
 		}
-
 	</style>
 
-	<script type="text/javascript"
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbCegTmosQTythuNphqbFXJF7QfYtLDjM">
-</script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbCegTmosQTythuNphqbFXJF7QfYtLDjM"></script>
 
-<title> - Rendezvous - </title>
+	<title> - Rendezvous - </title>
 
-<!-- JQUERY -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<!-- /JQUERY -->
+	<!-- JQUERY -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<!-- /JQUERY -->
 
-<!-- Bootstrap -->
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> 
-<!-- Latest compiled and minified JavaScript -->
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<!-- /Bootstrap -->
+	<!-- Bootstrap -->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> 
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<!-- /Bootstrap -->
 
-<!-- Flat UI -->
-<link href="css/flat-ui.css" rel="stylesheet">
-<!-- /Flat UI -->
+	<!-- Flat UI -->
+	<link href="vendors/flat-ui/css/flat-ui.css" rel="stylesheet">
+	<!-- /Flat UI -->
 
-<!-- ROS JS -->
-<script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-<script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
-<!-- /ROS JS -->
+	<!-- ROS JS -->
+	<script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+	<script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+	<!-- /ROS JS -->
 
-<!-- BUTTONS FUNCTIONS -->
-<script src="js/btn_function.js"></script>
-<!-- /BUTTONS FUNCTIONS -->
+	<!-- BUTTONS FUNCTIONS -->
+	<script src="resources/js/btn_function.js"></script>
+	<!-- /BUTTONS FUNCTIONS -->
 
-<!-- FLIGHT INDICATORS -->
-<link rel="stylesheet" type="text/css" href="jQuery-Flight-Indicators/css/flightindicators.css" />
-<!-- /FLIGHT INDICATORS -->
+	<!-- FLIGHT INDICATORS -->
+	<link rel="stylesheet" type="text/css" href="vendors/flightindicators/css/flightindicators.css">
+	<!-- /FLIGHT INDICATORS -->
 
 </head>
 
@@ -74,25 +71,70 @@
 
 		<div class="collapse navbar-collapse" id="navbar-collapse-3">
 			<ul class="nav navbar-nav">
-				<li><a href="#1">Charts</a></li>
+				<li><a href="plot.html">Charts</a></li>
 				<li><a href="#2">Second Item</a></li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="plot.html#">Charts</a></li>
-						<li><a href="#">Another action</a></li>
-						<li><a href="#">Something else here</a></li>
-						<li class="divider"></li>
-						<li><a href="#">Separated link</a></li>
-					</ul>
-				</li>
-				<li><a href="#3">Contacts</a></li>
+				<li><a data-toggle="modal" data-target="#settingsModal"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+				<li><a href="#3"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
 			</ul>
 		</div>
 	</nav>
+
+	<!-- Settings Modal -->
+	<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h5 class="modal-title" id="myModalLabel">RandezVous Settings</h5>
+
+					<ul class="nav nav-pills nav-justified">
+						<li><a href="settingsModal.html#settingsROS" data-toggle="tab">ROS</a></li>
+						<li><a href="#settingsCharts" data-toggle="tab">Charts</a></li>
+						<li><a href="#settingsVideo" data-toggle="tab">Video</a></li>
+					</ul>
+
+				</div>
+
+				<div class="modal-body">
+
+					<div class="tab-content">
+						<div class="tab-pane" id="settingsROS">
+							<h6> Topics and Messages </h6>
+							<div class="col-md-3">
+								Pose Topic <input type="checkbox" checked data-toggle="switch" id="poseSwitch" />
+							</div> 	
+							<div class="col-md-3">
+								Position Topic <input type="checkbox" checked data-toggle="switch" id="positionSwitch" />
+							</div>
+							<div class="col-md-3">
+								Magnetometer Topic <input type="checkbox" checked data-toggle="switch" id="magnetometerSwitch" />
+							</div>
+							<div class="col-md-3">
+								GPS Topic <input type="checkbox" checked data-toggle="switch" id="gpsSwitch" />
+							</div>
+						</div>
+
+						<div class="tab-pane" id="settingsCharts">
+							<h6> Charts Settings </h6>
+						</div>
+
+						<div class="tab-pane" id="settingsVideo">
+							<h6> Video Settings </h6>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary">Save changes</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<div class="container">
 		<div class="row">
@@ -136,7 +178,7 @@
 
 						<div id="map-canvas" class='map-canvas' >
 							<!-- map -->	
-							<script src="js/map_init_gmaps.js"></script>
+							<script src="resources/js/map_init_gmaps.js"></script>
 							<!-- /map -->
 							
 						</div>
@@ -158,21 +200,24 @@
 				</div>
 			</p>
 		</div>
+
 	</div>
 
 	<!-- jQuery and JavaScript plugins -->
 	<script src="http://code.jquery.com/jquery.js"></script>
 	<!-- LISTENER.JS -->
-	<script type="text/javascript" src="js/subscriber_ros_gui.js"></script>
+	<script type="text/javascript" src="resources/js/subscriber_ros_gui.js"></script>
 	<!-- PUBLISHER.JS -->
-	<!-- <script type="text/javascript" src="js/publisher_gui_ros.js"></script> -->
+	<!-- <script type="text/javascript" src="resources/js/publisher_gui_ros.js"></script> -->
 	<!-- Importing jQuery library -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-
 	<!-- FLIGHT INDICATORS -->
-	<script src="jQuery-Flight-Indicators/js/jquery.flightindicators.js"></script>
-	<script src="js/indicators.js"></script>
+	<script src="vendors/flightindicators/plugin.jquery/jquery.flightindicators.js"></script>
+	<script src="resources/js/indicators.js"></script>
 	<!-- /FLIGHT INDICATORS -->
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="vendors/flat-ui/plugin.jquery/flat-ui.min.js"></script>
+	<script src="resources/js/flat-ui_application.js"></script>
 
 </body>
 </html>
