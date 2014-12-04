@@ -7,22 +7,35 @@
 
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<style type="text/css">
-		html { height: 100%; }
-		body { height: 100%; padding-top: 15px; padding-right: 70px; padding-bottom: 25px; padding-left: 70px; }
+
+		html{ 
+			height: 100%; 
+		}
+
+		body{
+			height: 100%; 
+			padding-top: 15px; 
+			padding-right: 70px; 
+			padding-bottom: 25px; 
+			padding-left: 70px;
+		}
+
 		.map-container{
 			position: relative;
 			width: 100%;
 			padding-bottom: 56.25%; /* Ratio 16:9 ( 100%/16*9 = 56.25% ) */
 		}
+		
 		.map-container .map-canvas{
 			position: absolute;
 			top: 0;
 			right: 0;
 			bottom: 0;
 			left: 0;
-			margin: 0;
+			margin: 15px;
 			padding: 0;
 		}
+
 	</style>
 
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbCegTmosQTythuNphqbFXJF7QfYtLDjM"></script>
@@ -86,36 +99,54 @@
 	<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
+
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-					<h5 class="modal-title" id="myModalLabel">RandezVous Settings</h5>
-
+					<h5 class="modal-title" id="settingsModalLabel">RandezVous Settings</h5>
 					<ul class="nav nav-pills nav-justified">
-						<li><a href="settingsModal.html#settingsROS" data-toggle="tab">ROS</a></li>
+						<li><a href="#settingsROS" data-toggle="tab">ROS</a></li>
 						<li><a href="#settingsCharts" data-toggle="tab">Charts</a></li>
 						<li><a href="#settingsVideo" data-toggle="tab">Video</a></li>
 					</ul>
-
-				</div>
+				</div><!-- modal-header -->
 
 				<div class="modal-body">
 
 					<div class="tab-content">
 						<div class="tab-pane" id="settingsROS">
 							<h6> Topics and Messages </h6>
-							<div class="col-md-3">
-								Pose Topic <input type="checkbox" checked data-toggle="switch" id="poseSwitch" />
-							</div> 	
-							<div class="col-md-3">
-								Position Topic <input type="checkbox" checked data-toggle="switch" id="positionSwitch" />
+							<div>
+								<form class="form-horizontal" role="form">
+									<div class="form-group">
+										<label for="inputPose" class="col-sm-2 control-label">Pose</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control" id="inputPose" placeholder="/pose_topic">
+										</div>
+										<div class="col-sm-3">
+											<input type="checkbox" checked data-toggle="switch" id="poseSwitch" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputGps" class="col-sm-2 control-label">GPS</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control" id="inputGps" placeholder="/gps_topic">
+										</div>
+										<div class="col-sm-3">
+											<input type="checkbox" checked data-toggle="switch" id="gpsSwitch" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="inputMagnetometer" class="col-sm-2 control-label">Mag</label>
+										<div class="col-sm-7">
+											<input type="text" class="form-control" id="inputMagnetometer" placeholder="/magnetometer_topic">
+										</div>
+										<div class="col-sm-3">
+											<input type="checkbox" checked data-toggle="switch" id="magnetometerSwitch" />
+										</div>
+									</div>
+								</form>
 							</div>
-							<div class="col-md-3">
-								Magnetometer Topic <input type="checkbox" checked data-toggle="switch" id="magnetometerSwitch" />
-							</div>
-							<div class="col-md-3">
-								GPS Topic <input type="checkbox" checked data-toggle="switch" id="gpsSwitch" />
-							</div>
-						</div>
+						</div> 
 
 						<div class="tab-pane" id="settingsCharts">
 							<h6> Charts Settings </h6>
@@ -124,14 +155,14 @@
 						<div class="tab-pane" id="settingsVideo">
 							<h6> Video Settings </h6>
 						</div>
-					</div>
 
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary">Save changes</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					</div>
+					</div><!-- tab-content -->
+				</div><!-- modal-body -->
 
-				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary">Save changes</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>	
 			</div>
 		</div>
 	</div>
@@ -169,39 +200,34 @@
 				</button>
 
 			</div>
-		</div>
+		</div> <!-- row -->
+
 
 		<div class="row">
-			<p>
-				<div class="col-lg-12 text-center">
-					<div class="map-container" >
-
-						<div id="map-canvas" class='map-canvas' >
-							<!-- map -->	
-							<script src="resources/js/map_init_gmaps.js"></script>
-							<!-- /map -->
-							
-						</div>
+			<div class="col-lg-12 text-center">
+				<div class="map-container" >
+					<div id="map-canvas" class='map-canvas' >
+						<!-- map -->	
+						<script src="resources/js/map_init_gmaps.js"></script>
+						<!-- /map -->
 					</div>
 				</div>
-			</p>
-		</div>
+			</div>
+		</div> <!-- row -->
+
 
 		<div class="row">
-			<p>
-				<div class="col-lg-12 text-center">
-					<div>
-						<span id="airspeed"></span>
-						<span id="attitude"></span>
-						<span id="altimeter"></span>            
-						<span id="turn_coordinator"></span>
-						<span id="heading"></span>	 
-					</div>
+			<div class="col-lg-12 text-center">
+				<div>
+					<span id="airspeed"></span>
+					<span id="attitude"></span>
+					<span id="altimeter"></span>            
+					<span id="turn_coordinator"></span>
+					<span id="heading"></span>	 
 				</div>
-			</p>
-		</div>
-
-	</div>
+			</div>
+		</div><!-- row -->
+	</div> <!-- container -->
 
 	<!-- jQuery and JavaScript plugins -->
 	<script src="http://code.jquery.com/jquery.js"></script>
