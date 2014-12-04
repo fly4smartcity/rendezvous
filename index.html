@@ -15,9 +15,22 @@
 		body{
 			height: 100%; 
 			padding-top: 15px; 
-			padding-right: 70px; 
+			padding-right: 100px; 
 			padding-bottom: 25px; 
-			padding-left: 70px;
+			padding-left: 100px;
+		}
+
+		#settingsModal .modal-dialog
+		{
+			width: 35%;
+		}
+
+		#main-container{
+			margin: 15px;
+		}
+
+		#fligth-indicators{
+			margin: 15px;
 		}
 
 		.map-container{
@@ -32,7 +45,6 @@
 			right: 0;
 			bottom: 0;
 			left: 0;
-			margin: 15px;
 			padding: 0;
 		}
 
@@ -103,50 +115,60 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 					<h5 class="modal-title" id="settingsModalLabel">RandezVous Settings</h5>
-					<ul class="nav nav-pills nav-justified">
+				<!--<ul class="nav nav-pills nav-justified">
 						<li><a href="#settingsROS" data-toggle="tab">ROS</a></li>
 						<li><a href="#settingsCharts" data-toggle="tab">Charts</a></li>
 						<li><a href="#settingsVideo" data-toggle="tab">Video</a></li>
-					</ul>
+					</ul>-->
 				</div><!-- modal-header -->
 
 				<div class="modal-body">
 
-					<div class="tab-content">
-						<div class="tab-pane" id="settingsROS">
-							<h6> Topics and Messages </h6>
-							<div>
-								<form class="form-horizontal" role="form">
-									<div class="form-group">
-										<label for="inputPose" class="col-sm-2 control-label">Pose</label>
-										<div class="col-sm-7">
-											<input type="text" class="form-control" id="inputPose" placeholder="/pose_topic">
-										</div>
-										<div class="col-sm-3">
-											<input type="checkbox" checked data-toggle="switch" id="poseSwitch" />
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="inputGps" class="col-sm-2 control-label">GPS</label>
-										<div class="col-sm-7">
-											<input type="text" class="form-control" id="inputGps" placeholder="/gps_topic">
-										</div>
-										<div class="col-sm-3">
-											<input type="checkbox" checked data-toggle="switch" id="gpsSwitch" />
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="inputMagnetometer" class="col-sm-2 control-label">Mag</label>
-										<div class="col-sm-7">
-											<input type="text" class="form-control" id="inputMagnetometer" placeholder="/magnetometer_topic">
-										</div>
-										<div class="col-sm-3">
-											<input type="checkbox" checked data-toggle="switch" id="magnetometerSwitch" />
-										</div>
-									</div>
-								</form>
+				<!--<div class="tab-content">
+				<div class="tab-pane" id="settingsROS"> --> <!-- Tabbed interface, implement if the number of total options grows too much -->
+					<h6> Topics and Messages </h6>
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="inputPose" class="col-sm-2 control-label">Pose</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="inputPose" placeholder="/pose_topic">
 							</div>
-						</div> 
+							<div class="col-sm-3">
+								<input type="checkbox" checked data-toggle="switch" id="poseSwitch" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputGps" class="col-sm-2 control-label">GPS</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="inputGps" placeholder="/gps_topic">
+							</div>
+							<div class="col-sm-3">
+								<input type="checkbox" checked data-toggle="switch" id="gpsSwitch" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputMagnetometer" class="col-sm-2 control-label">Mag</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="inputMagnetometer" placeholder="/magnetometer_topic">
+							</div>
+							<div class="col-sm-3">
+								<input type="checkbox" checked data-toggle="switch" id="magnetometerSwitch" />
+							</div>
+						</div>
+					</form>
+					<h6> Video </h6>
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="videoUrl" class="col-sm-2 control-label">mjpeg URL</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="videoUrl" placeholder="http://localhost:8080/stream?topic=/camera_node/image_raw">
+							</div>
+							<div class="col-sm-3">
+								<input type="checkbox" checked data-toggle="switch" id="videoSwitch" />
+							</div>
+						</div>
+					</form>
+				<!--</div> 
 
 						<div class="tab-pane" id="settingsCharts">
 							<h6> Charts Settings </h6>
@@ -156,7 +178,7 @@
 							<h6> Video Settings </h6>
 						</div>
 
-					</div><!-- tab-content -->
+					</div> --> <!-- tab-content -->  
 				</div><!-- modal-body -->
 
 				<div class="modal-footer">
@@ -167,7 +189,7 @@
 		</div>
 	</div>
 
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12 text-center">
 
@@ -200,25 +222,33 @@
 				</button>
 
 			</div>
-		</div> <!-- row -->
+		</div> <!-- 1st row -->
 
 
 		<div class="row">
-			<div class="col-lg-12 text-center">
-				<div class="map-container" >
-					<div id="map-canvas" class='map-canvas' >
-						<!-- map -->	
-						<script src="resources/js/map_init_gmaps.js"></script>
-						<!-- /map -->
+			<div id="main-container">
+				<div class="col-lg-4 text-center">
+					<div class="video-container">
+						<img id='cam_embed' width=100% class="decoded" alt="http://localhost:8080/stream?topic=/bluefox_ros_node/image_raw" src="http://localhost:8080/stream?topic=/bluefox_ros_node/image_raw">
+						<!--<embed id='cam_embed' type="application/x-vlc-plugin" width=100% name="player" target="udp://10.82.98.54:2121" />-->
+					</div>
+				</div>
+				<div class="col-lg-8 text-center">
+					<div class="map-container" >
+						<div id="map-canvas" class='map-canvas' >
+							<!-- map -->	
+							<script src="resources/js/map_init_gmaps.js"></script>
+							<!-- /map -->
+						</div>
 					</div>
 				</div>
 			</div>
-		</div> <!-- row -->
+		</div> <!-- 2nd row -->
 
 
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<div>
+				<div id="fligth-indicators">
 					<span id="airspeed"></span>
 					<span id="attitude"></span>
 					<span id="altimeter"></span>            
@@ -226,7 +256,7 @@
 					<span id="heading"></span>	 
 				</div>
 			</div>
-		</div><!-- row -->
+		</div> <!-- 3rd row -->
 	</div> <!-- container -->
 
 	<!-- jQuery and JavaScript plugins -->
