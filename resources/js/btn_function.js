@@ -4,9 +4,10 @@ function f_btnCallback1()
 
 }
 
-function f_btnCallback2()
+function f_btnVideoCallback()
 {	
-
+    $("#right-pane").toggleClass('col-lg-12 col-lg-8');
+    $("#left-pane").toggleClass('col-lg-0 col-lg-4');
 }
 
 function f_btnCallback3()
