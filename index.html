@@ -105,9 +105,9 @@
             createCookie("rendezvous_inputGps",document.getElementById("inputGps").value,1);
             createCookie("rendezvous_inputMagnetometer",document.getElementById("inputMagnetometer").value,1);
 
-            createCookie("rendezvous_poseSwitch",document.getElementById("poseSwitch").value,1);
-            createCookie("rendezvous_gpsSwitch",document.getElementById("gpsSwitch").value,1);
-            createCookie("rendezvous_magnetometerSwitch",document.getElementById("magnetometerSwitch").value,1);
+            createCookie("rendezvous_poseSwitch",document.getElementById("poseSwitch").checked,1);
+            createCookie("rendezvous_gpsSwitch",document.getElementById("gpsSwitch").checked,1);
+            createCookie("rendezvous_magnetometerSwitch",document.getElementById("magnetometerSwitch").checked,1);
 
             createCookie("rendezvous_videoUrl",document.getElementById("videoUrl").value,1);
 
@@ -124,11 +124,11 @@
                 document.getElementById("inputMagnetometer").value=temp;
 
             if(temp=readCookie("rendezvous_poseSwitch"))
-                document.getElementById("poseSwitch").value=temp;
+                document.getElementById("poseSwitch").checked=temp;
             if(temp=readCookie("rendezvous_gpsSwitch"))
-                document.getElementById("gpsSwitch").value=temp;
+                document.getElementById("gpsSwitch").checked=temp;
             if(temp=readCookie("rendezvous_magnetometerSwitch"))
-                document.getElementById("magnetometerSwitch").value=temp;
+                document.getElementById("magnetometerSwitch").checked=temp;
 
             if(temp=readCookie("rendezvous_videoUrl"))
                 document.getElementById("videoUrl").value=temp;
