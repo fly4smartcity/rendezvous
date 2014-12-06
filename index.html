@@ -3,20 +3,20 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">  
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 	<style type="text/css">
 
-		html{ 
-			height: 100%; 
+		html{
+			height: 100%;
 		}
 
 		body{
-			height: 100%; 
-			padding-top: 15px; 
-			padding-right: 100px; 
-			padding-bottom: 25px; 
+			height: 100%;
+			padding-top: 15px;
+			padding-right: 100px;
+			padding-bottom: 25px;
 			padding-left: 100px;
 		}
 
@@ -40,7 +40,7 @@
 			width: 100%;
 			padding-bottom: 650px; /* Ratio 16:9 ( 100%/16*9 = 56.25% ) */
 		}
-		
+
 		.map-container .map-canvas{
 			position: absolute;
 			top: 0;
@@ -53,7 +53,7 @@
 		#left-pane{
 			background: #2c3e50;
 		}
-		
+
 		#right-pane{
 			background: white;
 		}
@@ -74,6 +74,67 @@
 
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbCegTmosQTythuNphqbFXJF7QfYtLDjM"></script>
 
+    <script type="text/javascript">
+        function createCookie(name,value,days) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime()+(days*24*60*60*1000));
+                var expires = "; expires="+date.toGMTString();
+            }
+            else var expires = "";
+            document.cookie = name+"="+value+expires+"; path=/";
+        }
+
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+        }
+
+        function eraseCookie(name) {
+            createCookie(name,"",-1);
+        }
+
+        function saveOptions() {
+            createCookie("rendezvous_inputPose",document.getElementById("inputPose").value,1);
+            createCookie("rendezvous_inputGps",document.getElementById("inputGps").value,1);
+            createCookie("rendezvous_inputMagnetometer",document.getElementById("inputMagnetometer").value,1);
+
+            createCookie("rendezvous_poseSwitch",document.getElementById("poseSwitch").value,1);
+            createCookie("rendezvous_gpsSwitch",document.getElementById("gpsSwitch").value,1);
+            createCookie("rendezvous_magnetometerSwitch",document.getElementById("magnetometerSwitch").value,1);
+
+            createCookie("rendezvous_videoUrl",document.getElementById("videoUrl").value,1);
+
+
+
+        }
+
+        function loadOptions() {
+            if(temp=readCookie("rendezvous_inputPose"))
+                document.getElementById("inputPose").value=temp;
+            if(temp=readCookie("rendezvous_inputGps"))
+                document.getElementById("inputGps").value=temp;
+            if(temp=readCookie("rendezvous_inputMagnetometer"))
+                document.getElementById("inputMagnetometer").value=temp;
+
+            if(temp=readCookie("rendezvous_poseSwitch"))
+                document.getElementById("poseSwitch").value=temp;
+            if(temp=readCookie("rendezvous_gpsSwitch"))
+                document.getElementById("gpsSwitch").value=temp;
+            if(temp=readCookie("rendezvous_magnetometerSwitch"))
+                document.getElementById("magnetometerSwitch").value=temp;
+
+            if(temp=readCookie("rendezvous_videoUrl"))
+                document.getElementById("videoUrl").value=temp;
+        }
+    </script>
+
 	<title> - Rendezvous - </title>
 
 	<!-- JQUERY -->
@@ -82,7 +143,7 @@
 
 	<!-- Bootstrap -->
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> 
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<!-- /Bootstrap -->
@@ -106,7 +167,7 @@
 
 </head>
 
-<body>
+<body onload="loadOptions()">
 
 	<nav class="navbar navbar-default navbar-inverse" role="navigation">
 		<div class="navbar-header">
@@ -190,7 +251,7 @@
 							</div>
 						</div>
 					</form>
-				<!--</div> 
+				<!--</div>
 
 						<div class="tab-pane" id="settingsCharts">
 							<h6> Charts Settings </h6>
@@ -200,13 +261,13 @@
 							<h6> Video Settings </h6>
 						</div>
 
-					</div> --> <!-- tab-content -->  
+					</div> --> <!-- tab-content -->
 				</div><!-- modal-body -->
 
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">Save changes</button>
+					<button type="button" class="btn btn-primary" onload="loadOptions()" onclick="saveOptions()">Save changes</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				</div>	
+				</div>
 			</div>
 		</div>
 	</div>	<!-- /Settings Modal -->
@@ -258,7 +319,7 @@
 				<div id="right-pane" class="col-lg-12 text-center">
 					<div class="map-container" >
 						<div id="map-canvas" class='map-canvas' >
-							<!-- map -->	
+							<!-- map -->
 							<script src="resources/js/map_init_gmaps.js"></script>
 							<!-- /map -->
 						</div>
@@ -272,9 +333,9 @@
 				<div id="fligth-indicators">
 					<span id="airspeed"></span>
 					<span id="attitude"></span>
-					<span id="altimeter"></span>            
+					<span id="altimeter"></span>
 					<span id="turn_coordinator"></span>
-					<span id="heading"></span>	 
+					<span id="heading"></span>
 				</div>
 			</div>
 		</div> <!-- 3rd row -->
