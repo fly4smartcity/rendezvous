@@ -13,7 +13,9 @@ setInterval(function() {
     attitude.setPitch(50*Math.sin(increment/20));
     
     // Heading update
-    heading.setHeading(increment);
+    if (initOk == true) {
+        heading.setHeading(headingDegrees);
+    }
     
     // Vario update
     variometer.setVario(2*Math.sin(increment/10));
