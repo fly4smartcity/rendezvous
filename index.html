@@ -126,9 +126,9 @@
 
             if(readCookie("rendezvous_poseSwitch")=="false")
                 $('#poseSwitch').bootstrapSwitch('state', false);
-            if(readCookie("rendezvous_gpsSwitch"))
+            if(readCookie("rendezvous_gpsSwitch")=="false")
                 $('#gpsSwitch').bootstrapSwitch('state', false);
-            if(readCookie("rendezvous_magnetometerSwitch")=="false"))
+            if(readCookie("rendezvous_magnetometerSwitch")=="false")
                 $('#magnetometerSwitch').bootstrapSwitch('state', false);
 
             if(temp=readCookie("rendezvous_videoUrl"))
