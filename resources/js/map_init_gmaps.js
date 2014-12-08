@@ -19,6 +19,20 @@ function initialize() {
 
 }
 
+function initialize(lat,lng) {
+    var starting = new google.maps.LatLng(lat, lng); //Zurich
+
+    var mapOptions = {
+        center: starting,
+        zoom: 18,
+        mapTypeId: 'satellite'
+    };
+
+    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+    map.setTilt(0); //disable 45° view
+
+}
+
 function putHome(lat, lng) {
     var position = new google.maps.LatLng(lat, lng);
     var Home = 'images/homeMarker.png';
@@ -80,4 +94,4 @@ function rotateArrow() {
     }, 125); //updating the rotation 8 times per second
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+//google.maps.event.addDomListener(window, 'load', initialize);
