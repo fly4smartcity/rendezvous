@@ -6,243 +6,30 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-	<style type="text/css">
 
-		html{
-			height: 100%;
-		}
+	<!-- main CSS -->
+	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+	<!-- Flight indicators CSS -->
+	<link rel="stylesheet" type="text/css" href="vendors/flightindicators/css/flightindicators.css">
 
-		body{
-			height: 100%;
-			padding-top: 15px;
-			padding-right: 100px;
-			padding-bottom: 25px;
-			padding-left: 100px;
-		}
-
-		#settingsModal .modal-dialog{
-			width: 35%;
-		}
-
-		#main-container{
-			margin-top: 15px;
-			margin-left: 5%;
-			margin-right: 5%;
-
-		}
-
-		#fligth-indicators{
-			margin: 15px;
-		}
-
-		.map-container{
-			position: relative;
-			width: 100%;
-			padding-bottom: 650px; /* Ratio 16:9 ( 100%/16*9 = 56.25% ) */
-		}
-
-		.map-container .map-canvas{
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			padding: 0;
-		}
-
-		#left-pane{
-			background: #2c3e50;
-		}
-
-		#right-pane{
-			background: white;
-		}
-
-		div.sliding-row div{
-			-webkit-transition: width 0.6s ease;
-			-moz-transition: width 0.6s ease;
-			-o-transition: width 0.6s ease;
-			transition: width 0.6s ease;
-		}
-
-		.col-lg-0{
-			width: 0 !important;
-			float:left
-		}
-
-	</style>
-
+	<!-- Google maps -->
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbCegTmosQTythuNphqbFXJF7QfYtLDjM"></script>
-
-
-    <!-- scrolling credits -->
-    <script type="text/javascript" src="https://raw.githubusercontent.com/processing-js/processing-js/master/processing.min.js"></script>
-    <link rel="stylesheet" href="resources/js/02-scrolling.css" type="text/css">
-
-    <script type="text/javascript" src="https://raw.githubusercontent.com/grantm/jquery-title-sequence/master/jquery.titlesequence.js"></script>
-    <script type="text/javascript">
-        // Run at half speed if called from PhantomJS (see ph-render.js for why)
-        var options = { time_factor: 1 };
-        if( ((navigator ||{}).userAgent || '').match(/PhantomJS/) ) {
-            options.time_factor = 2;
-        }
-
-        $('#titles').titleSequence([
-
-            {
-                pause: 800
-            },
-
-            {
-                content: 'The End',
-                id: 'the-end',
-                css: {left: '0px', top: '160px', opacity: 0 },
-                animate: { opacity: 1 },
-                duration: 1200,
-                pause: 800
-            },
-
-            {
-                selector: '#the-end',
-                animate: { opacity: 0 },
-                duration: 1200,
-            },
-
-            {
-                delete: '#the-end',
-            },
-
-            {
-                content: $('#credits-source').html(),
-                id: 'credits',
-                css: { top: '350px', height: '1000px' },
-                animate: { top: '-1150px' },
-                duration: 20000,
-                easing: 'linear'
-            },
-
-            function() {
-                if(console && console.log) {
-                    console.log('done');
-                }
-            }
-
-        ], options);
-    </script>
-
-    <script type="text/javascript">
-        function createCookie(name,value,days) {
-            if (days) {
-                var date = new Date();
-                date.setTime(date.getTime()+(days*24*60*60*1000));
-                var expires = "; expires="+date.toGMTString();
-            }
-            else var expires = "";
-            document.cookie = name+"="+value+expires+"; path=/";
-        }
-
-        function readCookie(name) {
-            var nameEQ = name + "=";
-            var ca = document.cookie.split(';');
-            for(var i=0;i < ca.length;i++) {
-                var c = ca[i];
-                while (c.charAt(0)==' ') c = c.substring(1,c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-            }
-            return null;
-        }
-
-        function eraseCookie(name) {
-            createCookie(name,"",-1);
-        }
-
-        function saveOptions() {
-            createCookie("rendezvous_inputPose",document.getElementById("inputPose").value,1);
-            createCookie("rendezvous_inputGps",document.getElementById("inputGps").value,1);
-            createCookie("rendezvous_inputMagnetometer",document.getElementById("inputMagnetometer").value,1);
-
-            createCookie("rendezvous_poseSwitch",$('#poseSwitch').bootstrapSwitch('state'),1);
-            createCookie("rendezvous_gpsSwitch",$('#gpsSwitch').bootstrapSwitch('state'),1);
-            createCookie("rendezvous_magnetometerSwitch",$('#magnetometerSwitch').bootstrapSwitch('state'),1);
-
-            createCookie("rendezvous_videoUrl",document.getElementById("videoUrl").value,1);
-            createCookie("rendezvous_mapCoords",document.getElementById("mapCoords").value,1);
-
-
-
-        }
-
-        function loadOptions() {
-            if(temp=readCookie("rendezvous_inputPose"))
-                document.getElementById("inputPose").value=temp;
-            if(temp=readCookie("rendezvous_inputGps"))
-                document.getElementById("inputGps").value=temp;
-            if(temp=readCookie("rendezvous_inputMagnetometer"))
-                document.getElementById("inputMagnetometer").value=temp;
-
-
-            if(readCookie("rendezvous_poseSwitch")=="false")
-                $('#poseSwitch').bootstrapSwitch('state', false);
-            if(readCookie("rendezvous_gpsSwitch")=="false")
-                $('#gpsSwitch').bootstrapSwitch('state', false);
-            if(readCookie("rendezvous_magnetometerSwitch")=="false")
-                $('#magnetometerSwitch').bootstrapSwitch('state', false);
-
-            if(temp=readCookie("rendezvous_videoUrl"))
-                document.getElementById("videoUrl").value=temp;
-            if(temp=readCookie("rendezvous_mapCoords"))
-            {
-                document.getElementById("mapCoords").value=temp;
-                initialize(temp.split(',')[0], temp.split(',')[1]);
-            }
-            else initialize(47.413157, 8.548645);
-        }
-
-        function defaultOptions() {
-            eraseCookie("rendezvous_inputPose");
-            eraseCookie("rendezvous_inputGps");
-            eraseCookie("rendezvous_inputMagnetometer");
-
-            eraseCookie("rendezvous_poseSwitch");
-            eraseCookie("rendezvous_gpsSwitch");
-            eraseCookie("rendezvous_magnetometerSwitch");
-
-            eraseCookie("rendezvous_videoUrl");
-            eraseCookie("rendezvous_mapCoords");
-
-            //initialize();
-        }
-    </script>
-
-	<title> - Rendezvous - </title>
-
-	<!-- JQUERY -->
+	<!-- jQuery -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<!-- /JQUERY -->
-
 	<!-- Bootstrap -->
-	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-	<!-- Latest compiled and minified JavaScript -->
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-	<!-- /Bootstrap -->
-
-	<!-- Flat UI -->
+	<!-- Flat UI Bootstrap -->
 	<link href="vendors/flat-ui/css/flat-ui.css" rel="stylesheet">
-	<!-- /Flat UI -->
-
 	<!-- ROS JS -->
 	<script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
 	<script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
-	<!-- /ROS JS -->
+	<!-- Buttons functions -->
+	<script type="text/javascript" src="resources/js/btn_function.js"></script>
+	<!-- Cookies functions -->
+	<script type="text/javascript" src="resources/js/cookies.js"></script>
 
-	<!-- BUTTONS FUNCTIONS -->
-	<script src="resources/js/btn_function.js"></script>
-	<!-- /BUTTONS FUNCTIONS -->
-
-	<!-- FLIGHT INDICATORS -->
-	<link rel="stylesheet" type="text/css" href="vendors/flightindicators/css/flightindicators.css">
-	<!-- /FLIGHT INDICATORS -->
+	<title> - Rendezvous - </title>
 
 </head>
 
@@ -330,15 +117,15 @@
 							</div>
 						</div>
 					</form>
-                    <h6> Map </h6>
-                    <form class="form-horizontal" role="form">
-                        <div class="form-group">
-                            <label for="mapCoords" class="col-sm-2 control-label">GPS location</label>
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control" id="mapCoords" placeholder="47.413157, 8.548645">
-                            </div>
-                        </div>
-                    </form>
+					<h6> Map </h6>
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="mapCoords" class="col-sm-2 control-label">GPS location</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="mapCoords" placeholder="47.413157, 8.548645">
+							</div>
+						</div>
+					</form>
 				<!--</div>
 
 						<div class="tab-pane" id="settingsCharts">
@@ -353,7 +140,7 @@
 				</div><!-- modal-body -->
 
 				<div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="defaultOptions()">Reset to default</button>
+					<button type="button" class="btn btn-primary" onclick="defaultOptions()">Reset to default</button>
 					<button type="button" class="btn btn-primary" onclick="saveOptions()">Save changes</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				</div>
@@ -361,13 +148,13 @@
 		</div>
 	</div>	<!-- /Settings Modal -->
 
-    <!-- About Modal -->
-    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h5 class="modal-title" id="settingsModalLabel">About Rendezvous</h5>
+	<!-- About Modal -->
+	<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h5 class="modal-title" id="settingsModalLabel">About Rendezvous</h5>
                 <!--<ul class="nav nav-pills nav-justified">
                         <li><a href="#settingsROS" data-toggle="tab">ROS</a></li>
                         <li><a href="#settingsCharts" data-toggle="tab">Charts</a></li>
@@ -377,105 +164,107 @@
 
                 <div class="modal-body">
 
-                    <canvas data-processing-sources="about.pde"></canvas>
+                	<canvas data-processing-sources="about.pde"></canvas>
 
 
                 </div><!-- modal-body -->
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                	<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
                 </div>
             </div>
         </div>
     </div>  <!-- /Settings Modal -->
 
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-lg-12 text-center">
+    <div class="container-fluid">
+    	<div class="row">
+    		<div class="col-lg-12 text-center">
 
-				<button type="button" class="btn btn-default" onclick="f_btnCallback1()">
-					<span class="glyphicon glyphicon-send"></span> Function 1
-				</button>
+    			<button type="button" class="btn btn-default" onclick="f_btnCallback1()">
+    				<span class="glyphicon glyphicon-send"></span> Function 1
+    			</button>
 
-				<button type="button" class="btn btn-default" onclick="f_btnVideoCallback()">
-					<span class="glyphicon glyphicon-facetime-video"></span> Function 2
-				</button>
+    			<button type="button" class="btn btn-default" onclick="f_btnVideoCallback()">
+    				<span class="glyphicon glyphicon-facetime-video"></span> Function 2
+    			</button>
 
-				<button type="button" class="btn btn-default" onclick="f_btnCallback3()">
-					<span class="glyphicon glyphicon-sort"></span> Function 3
-				</button>
+    			<button type="button" class="btn btn-default" onclick="f_btnCallback3()">
+    				<span class="glyphicon glyphicon-sort"></span> Function 3
+    			</button>
 
-				<button type="button" class="btn btn-default" onclick="f_btnCallback4()">
-					<span class="glyphicon glyphicon-stats"></span> Function 4
-				</button>
+    			<button type="button" class="btn btn-default" onclick="f_btnCallback4()">
+    				<span class="glyphicon glyphicon-stats"></span> Function 4
+    			</button>
 
-				<button type="button" class="btn btn-success" onclick="f_btnCallbackStart()">
-					<span class="glyphicon glyphicon-play"></span> START
-				</button>
+    			<button type="button" class="btn btn-success" onclick="f_btnCallbackStart()">
+    				<span class="glyphicon glyphicon-play"></span> START
+    			</button>
 
-				<button type="button" class="btn btn-warning" onclick="f_btnCallbackWarning()">
-					<span class="glyphicon glyphicon-pause"></span> PAUSE
-				</button>
+    			<button type="button" class="btn btn-warning" onclick="f_btnCallbackWarning()">
+    				<span class="glyphicon glyphicon-pause"></span> PAUSE
+    			</button>
 
-				<button type="button" class="btn btn-danger" onclick="f_btnCallbackStop()">
-					<span class="glyphicon glyphicon-stop"></span> STOP
-				</button>
+    			<button type="button" class="btn btn-danger" onclick="f_btnCallbackStop()">
+    				<span class="glyphicon glyphicon-stop"></span> STOP
+    			</button>
 
-			</div>
-		</div> <!-- 1st row -->
+    		</div>
+    	</div> <!-- 1st row -->
 
 
-		<div class="row">
-			<div class="sliding-row" id="main-container">
-				<div id="left-pane" class="col-lg-0 text-center">
-					<div class="video-container">
-						<img id='cam_embed' width=100% class="decoded" alt="http://localhost:8080/stream?topic=/bluefox_ros_node/image_raw" src="http://localhost:8080/stream?topic=/bluefox_ros_node/image_raw">
-						<!--<embed id='cam_embed' type="application/x-vlc-plugin" width=100% name="player" target="udp://10.82.98.54:2121" />-->
-					</div>
-				</div>
-				<div id="right-pane" class="col-lg-12 text-center">
-					<div class="map-container" >
-						<div id="map-canvas" class='map-canvas' >
-							<!-- map -->
-							<script src="resources/js/map_init_gmaps.js"></script>
-							<!-- /map -->
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> <!-- 2nd row -->
+    	<div class="row">
+    		<div class="sliding-row" id="main-container">
+    			<div id="left-pane" class="col-lg-0 text-center">
+    				<div class="video-container">
+    					<img id='cam_embed' width=100% class="decoded" alt="http://localhost:8080/stream?topic=/bluefox_ros_node/image_raw" src="http://localhost:8080/stream?topic=/bluefox_ros_node/image_raw">
+    					<!--<embed id='cam_embed' type="application/x-vlc-plugin" width=100% name="player" target="udp://10.82.98.54:2121" />-->
+    				</div>
+    			</div>
+    			<div id="right-pane" class="col-lg-12 text-center">
+    				<div class="map-container" >
+    					<div id="map-canvas" class='map-canvas' >
+    						<!-- map -->
+    						<script src="resources/js/map_init_gmaps.js"></script>
+    						<!-- /map -->
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div> <!-- 2nd row -->
 
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<div id="fligth-indicators">
-					<span id="airspeed"></span>
-					<span id="attitude"></span>
-					<span id="altimeter"></span>
-					<span id="turn_coordinator"></span>
-					<span id="heading"></span>
-				</div>
-			</div>
-		</div> <!-- 3rd row -->
-	</div> <!-- container -->
+    	<div class="row">
+    		<div class="col-lg-12 text-center">
+    			<div id="fligth-indicators">
+    				<span id="airspeed"></span>
+    				<span id="attitude"></span>
+    				<span id="altimeter"></span>
+    				<span id="turn_coordinator"></span>
+    				<span id="heading"></span>
+    			</div>
+    		</div>
+    	</div> <!-- 3rd row -->
+    </div> <!-- container -->
 
-	<!-- jQuery and JavaScript plugins -->
-	<script src="http://code.jquery.com/jquery.js"></script>
-	<!-- LISTENER.JS -->
-	<script type="text/javascript" src="resources/js/subscriber_ros_gui.js"></script>
-	<!-- PUBLISHER.JS -->
-	<!-- <script type="text/javascript" src="resources/js/publisher_gui_ros.js"></script> -->
-	<!-- BUTTONS -->
-	<script type="text/javascript" src="resources/js/btn_function.js"></script>
-	<!-- Importing jQuery library -->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-	<!-- FLIGHT INDICATORS -->
-	<script src="vendors/flightindicators/plugin.jquery/jquery.flightindicators.js"></script>
-	<script src="resources/js/indicators.js"></script>
-	<!-- /FLIGHT INDICATORS -->
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="vendors/flat-ui/plugin.jquery/flat-ui.min.js"></script>
-	<script src="resources/js/flat-ui_application.js"></script>
+    <!-- jQuery and JavaScript plugins -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <!-- Ros listener -->
+    <script type="text/javascript" src="resources/js/subscriber_ros_gui.js"></script>
+    <!-- Ros subscriber -->
+    <!-- <script type="text/javascript" src="resources/js/publisher_gui_ros.js"></script> -->
+    <!-- Buttons functions -->
+    <script type="text/javascript" src="resources/js/btn_function.js"></script>
+    <!-- Importing jQuery library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <!-- Flight indicators -->
+    <script src="vendors/flightindicators/plugin.jquery/jquery.flightindicators.js"></script>
+    <script src="resources/js/indicators.js"></script>
+    <!-- Flat UI Bootstrap -->
+    <script src="vendors/flat-ui/plugin.jquery/flat-ui.min.js"></script>
+    <script src="resources/js/flat-ui_application.js"></script>
 
+    <!-- :) Snow Storm -->
     <script src="https://raw.githubusercontent.com/scottschiller/Snowstorm/master/snowstorm-min.js"></script>
+
+
 </body>
 </html>

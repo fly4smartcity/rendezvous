@@ -1,0 +1,61 @@
+html{
+	height: 100%;
+}
+
+body{
+	height: 100%;
+	padding-top: 15px;
+	padding-right: 100px;
+	padding-bottom: 25px;
+	padding-left: 100px;
+}
+
+#settingsModal .modal-dialog{
+	width: 35%;
+}
+
+#main-container{
+	margin-top: 15px;
+	margin-left: 5%;
+	margin-right: 5%;
+
+}
+
+#fligth-indicators{
+	margin: 15px;
+}
+
+.map-container{
+	position: relative;
+	width: 100%;
+	padding-bottom: 650px; /* Ratio 16:9 ( 100%/16*9 = 56.25% ) */
+}
+
+.map-container .map-canvas{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 0;
+}
+
+#left-pane{
+	background: #2c3e50;
+}
+
+#right-pane{
+	background: white;
+}
+
+div.sliding-row div{
+	-webkit-transition: width 0.6s ease;
+	-moz-transition: width 0.6s ease;
+	-o-transition: width 0.6s ease;
+	transition: width 0.6s ease;
+}
+
+.col-lg-0{
+	width: 0 !important;
+	float:left
+}
