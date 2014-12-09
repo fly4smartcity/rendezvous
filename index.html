@@ -155,115 +155,138 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 					<h5 class="modal-title" id="settingsModalLabel">About Rendezvous</h5>
-                <!--<ul class="nav nav-pills nav-justified">
-                        <li><a href="#settingsROS" data-toggle="tab">ROS</a></li>
-                        <li><a href="#settingsCharts" data-toggle="tab">Charts</a></li>
-                        <li><a href="#settingsVideo" data-toggle="tab">Video</a></li>
-                    </ul>-->
-                </div><!-- modal-header -->
 
-                <div class="modal-body">
+				</div><!-- modal-header -->
 
-                	<canvas data-processing-sources="about.pde"></canvas>
+				<div class="modal-body">
+					<p>
+						<small>
+							<strong>Rendezvous</strong> is a simple web-based GUI that runs in your browser and displays the position of your device/robot on a global map in real time. 
+						</small>
+					</p>
+
+					<p>
+						<small>
+							RV supports the <a href="http://www.ros.org/">ROS</a> standard messages and has been created by:
+							<ul>
+								<li><a href="mailto:gabriele.ermacora@polito.it">Gabriele Ermacora</a> </li>
+								<li><a href="mailto:stefano.rosa@polito.it">Stefano Rosa</a> </li>
+								<li><a href="mailto:antonio.toma@polito.it">Antonio Toma</a> </li>
+							</ul> 
+
+							feel free to contact us for info and/or if you want to actively contribute to the project.
+						</small>
+					</p>
+
+					<p>
+						<small>
+							Randezvous uses the following third part libraries:
+							<ul>
+								<li><a href="http://getbootstrap.com/">Bootstrap</a></li>
+								<li><a href="http://jquery.com/">jQuery</a></li>
+								<li><a href="https://github.com/RobotWebTools/roslibjs">RosLibjs</a></li>
+								<li><a href="https://github.com/designmodo/Flat-UI">Bootstrap Flat UI</a></li>
+								<li><a href="https://github.com/sebmatton/jQuery-Flight-Indicators">Flight Indicators</a></li>
+							</ul> 
+						</small>	
+					</p>
+				</div><!-- modal-body -->
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+				</div>
+			</div>
+		</div>
+	</div>  <!-- /Settings Modal -->
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+
+				<button type="button" class="btn btn-default" onclick="f_btnCallback1()">
+					<span class="glyphicon glyphicon-send"></span> Function 1
+				</button>
+
+				<button type="button" class="btn btn-default" onclick="f_btnVideoCallback()">
+					<span class="glyphicon glyphicon-facetime-video"></span> Function 2
+				</button>
+
+				<button type="button" class="btn btn-default" onclick="f_btnCallback3()">
+					<span class="glyphicon glyphicon-sort"></span> Function 3
+				</button>
+
+				<button type="button" class="btn btn-default" onclick="f_btnCallback4()">
+					<span class="glyphicon glyphicon-stats"></span> Function 4
+				</button>
+
+				<button type="button" class="btn btn-success" onclick="f_btnCallbackStart()">
+					<span class="glyphicon glyphicon-play"></span> START
+				</button>
+
+				<button type="button" class="btn btn-warning" onclick="f_btnCallbackWarning()">
+					<span class="glyphicon glyphicon-pause"></span> PAUSE
+				</button>
+
+				<button type="button" class="btn btn-danger" onclick="f_btnCallbackStop()">
+					<span class="glyphicon glyphicon-stop"></span> STOP
+				</button>
+
+			</div>
+		</div> <!-- 1st row -->
 
 
-                </div><!-- modal-body -->
+		<div class="row">
+			<div class="sliding-row" id="main-container">
+				<div id="left-pane" class="col-lg-0 text-center">
+					<div class="video-container">
+						<img id='cam_embed' width=100% class="decoded" alt="http://localhost:8080/stream?topic=/bluefox_ros_node/image_raw" src="http://localhost:8080/stream?topic=/bluefox_ros_node/image_raw">
+						<!--<embed id='cam_embed' type="application/x-vlc-plugin" width=100% name="player" target="udp://10.82.98.54:2121" />-->
+					</div>
+				</div>
+				<div id="right-pane" class="col-lg-12 text-center">
+					<div class="map-container" >
+						<div id="map-canvas" class='map-canvas' >
+							<!-- map -->
+							<script src="resources/js/map_init_gmaps.js"></script>
+							<!-- /map -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> <!-- 2nd row -->
 
-                <div class="modal-footer">
-                	<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
-                </div>
-            </div>
-        </div>
-    </div>  <!-- /Settings Modal -->
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<div id="fligth-indicators">
+					<span id="airspeed"></span>
+					<span id="attitude"></span>
+					<span id="altimeter"></span>
+					<span id="turn_coordinator"></span>
+					<span id="heading"></span>
+				</div>
+			</div>
+		</div> <!-- 3rd row -->
+	</div> <!-- container -->
 
-    <div class="container-fluid">
-    	<div class="row">
-    		<div class="col-lg-12 text-center">
+	<!-- jQuery and JavaScript plugins -->
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<!-- Ros listener -->
+	<script type="text/javascript" src="resources/js/subscriber_ros_gui.js"></script>
+	<!-- Ros subscriber -->
+	<!-- <script type="text/javascript" src="resources/js/publisher_gui_ros.js"></script> -->
+	<!-- Buttons functions -->
+	<script type="text/javascript" src="resources/js/btn_function.js"></script>
+	<!-- Importing jQuery library -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<!-- Flight indicators -->
+	<script src="vendors/flightindicators/plugin.jquery/jquery.flightindicators.js"></script>
+	<script src="resources/js/indicators.js"></script>
+	<!-- Flat UI Bootstrap -->
+	<script src="vendors/flat-ui/plugin.jquery/flat-ui.min.js"></script>
+	<script src="resources/js/flat-ui_application.js"></script>
 
-    			<button type="button" class="btn btn-default" onclick="f_btnCallback1()">
-    				<span class="glyphicon glyphicon-send"></span> Function 1
-    			</button>
-
-    			<button type="button" class="btn btn-default" onclick="f_btnVideoCallback()">
-    				<span class="glyphicon glyphicon-facetime-video"></span> Function 2
-    			</button>
-
-    			<button type="button" class="btn btn-default" onclick="f_btnCallback3()">
-    				<span class="glyphicon glyphicon-sort"></span> Function 3
-    			</button>
-
-    			<button type="button" class="btn btn-default" onclick="f_btnCallback4()">
-    				<span class="glyphicon glyphicon-stats"></span> Function 4
-    			</button>
-
-    			<button type="button" class="btn btn-success" onclick="f_btnCallbackStart()">
-    				<span class="glyphicon glyphicon-play"></span> START
-    			</button>
-
-    			<button type="button" class="btn btn-warning" onclick="f_btnCallbackWarning()">
-    				<span class="glyphicon glyphicon-pause"></span> PAUSE
-    			</button>
-
-    			<button type="button" class="btn btn-danger" onclick="f_btnCallbackStop()">
-    				<span class="glyphicon glyphicon-stop"></span> STOP
-    			</button>
-
-    		</div>
-    	</div> <!-- 1st row -->
-
-
-    	<div class="row">
-    		<div class="sliding-row" id="main-container">
-    			<div id="left-pane" class="col-lg-0 text-center">
-    				<div class="video-container">
-    					<img id='cam_embed' width=100% class="decoded" alt="http://localhost:8080/stream?topic=/bluefox_ros_node/image_raw" src="http://localhost:8080/stream?topic=/bluefox_ros_node/image_raw">
-    					<!--<embed id='cam_embed' type="application/x-vlc-plugin" width=100% name="player" target="udp://10.82.98.54:2121" />-->
-    				</div>
-    			</div>
-    			<div id="right-pane" class="col-lg-12 text-center">
-    				<div class="map-container" >
-    					<div id="map-canvas" class='map-canvas' >
-    						<!-- map -->
-    						<script src="resources/js/map_init_gmaps.js"></script>
-    						<!-- /map -->
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div> <!-- 2nd row -->
-
-    	<div class="row">
-    		<div class="col-lg-12 text-center">
-    			<div id="fligth-indicators">
-    				<span id="airspeed"></span>
-    				<span id="attitude"></span>
-    				<span id="altimeter"></span>
-    				<span id="turn_coordinator"></span>
-    				<span id="heading"></span>
-    			</div>
-    		</div>
-    	</div> <!-- 3rd row -->
-    </div> <!-- container -->
-
-    <!-- jQuery and JavaScript plugins -->
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <!-- Ros listener -->
-    <script type="text/javascript" src="resources/js/subscriber_ros_gui.js"></script>
-    <!-- Ros subscriber -->
-    <!-- <script type="text/javascript" src="resources/js/publisher_gui_ros.js"></script> -->
-    <!-- Buttons functions -->
-    <script type="text/javascript" src="resources/js/btn_function.js"></script>
-    <!-- Importing jQuery library -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <!-- Flight indicators -->
-    <script src="vendors/flightindicators/plugin.jquery/jquery.flightindicators.js"></script>
-    <script src="resources/js/indicators.js"></script>
-    <!-- Flat UI Bootstrap -->
-    <script src="vendors/flat-ui/plugin.jquery/flat-ui.min.js"></script>
-    <script src="resources/js/flat-ui_application.js"></script>
-
-    <!-- :) Snow Storm -->
-    <script src="https://raw.githubusercontent.com/scottschiller/Snowstorm/master/snowstorm-min.js"></script>
+	<!-- :) Snow Storm -->
+	<script src="https://raw.githubusercontent.com/scottschiller/Snowstorm/master/snowstorm-min.js"></script>
 
 
 </body>

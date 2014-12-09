@@ -75,4 +75,4 @@ function defaultOptions() {
   eraseCookie("rendezvous_mapCoords");
 
             //initialize();
-        }
+}
