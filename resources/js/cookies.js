@@ -24,6 +24,9 @@ function eraseCookie(name) {
 }
 
 function saveOptions() {
+
+  createCookie("rendezvous_rosMasterURI",document.getElementById("rosMasterURI").value,1);
+
   createCookie("rendezvous_inputPose",document.getElementById("inputPose").value,1);
   createCookie("rendezvous_inputGps",document.getElementById("inputGps").value,1);
   createCookie("rendezvous_inputMagnetometer",document.getElementById("inputMagnetometer").value,1);
@@ -37,7 +40,11 @@ function saveOptions() {
 }
 
 function loadOptions() {
-  if(temp=readCookie("rendezvous_inputPose"))
+
+ if(temp=readCookie("rendezvous_rosMasterURI"))
+     document.getElementById("rosMasterURI").value=temp;
+
+ if(temp=readCookie("rendezvous_inputPose"))
      document.getElementById("inputPose").value=temp;
  if(temp=readCookie("rendezvous_inputGps"))
      document.getElementById("inputGps").value=temp;
@@ -54,6 +61,8 @@ function loadOptions() {
 
  if(temp=readCookie("rendezvous_videoUrl"))
      document.getElementById("videoUrl").value=temp;
+
+
  if(temp=readCookie("rendezvous_mapCoords"))
  {
      document.getElementById("mapCoords").value=temp;
@@ -63,6 +72,9 @@ function loadOptions() {
 }
 
 function defaultOptions() {
+
+  eraseCookie("rendezvous_rosMasterURI");
+
   eraseCookie("rendezvous_inputPose");
   eraseCookie("rendezvous_inputGps");
   eraseCookie("rendezvous_inputMagnetometer");
