@@ -16,7 +16,7 @@ loadOptions();
 
 
 var ros = new ROSLIB.Ros({
-    url: 'ws://130.192.163.189:9090'
+    url: 'ws://localhost:9090'
 });
 
 var gpsTopicName =document.getElementById("inputGps").value
