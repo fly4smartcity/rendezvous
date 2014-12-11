@@ -25,18 +25,18 @@ function eraseCookie(name) {
 
 function saveOptions() {
 
-  createCookie("rendezvous_rosMasterURI",document.getElementById("rosMasterURI").value,1);
+  createCookie("rendezvous_rosMasterURI",document.getElementById("rosMasterURI").value,30);
 
-  createCookie("rendezvous_inputPose",document.getElementById("inputPose").value,1);
-  createCookie("rendezvous_inputGps",document.getElementById("inputGps").value,1);
-  createCookie("rendezvous_inputMagnetometer",document.getElementById("inputMagnetometer").value,1);
+  createCookie("rendezvous_inputPose",document.getElementById("inputPose").value,30);
+  createCookie("rendezvous_inputGps",document.getElementById("inputGps").value,30);
+  createCookie("rendezvous_inputMagnetometer",document.getElementById("inputMagnetometer").value,30);
 
-  createCookie("rendezvous_poseSwitch",$('#poseSwitch').bootstrapSwitch('state'),1);
-  createCookie("rendezvous_gpsSwitch",$('#gpsSwitch').bootstrapSwitch('state'),1);
-  createCookie("rendezvous_magnetometerSwitch",$('#magnetometerSwitch').bootstrapSwitch('state'),1);
+  createCookie("rendezvous_poseSwitch",$('#poseSwitch').bootstrapSwitch('state'),30);
+  createCookie("rendezvous_gpsSwitch",$('#gpsSwitch').bootstrapSwitch('state'),30);
+  createCookie("rendezvous_magnetometerSwitch",$('#magnetometerSwitch').bootstrapSwitch('state'),30);
 
-  createCookie("rendezvous_videoUrl",document.getElementById("videoUrl").value,1);
-  createCookie("rendezvous_mapCoords",document.getElementById("mapCoords").value,1);
+  createCookie("rendezvous_videoUrl",document.getElementById("videoUrl").value,30);
+  createCookie("rendezvous_mapCoords",document.getElementById("mapCoords").value,30);
 }
 
 function loadOptions() {

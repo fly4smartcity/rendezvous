@@ -11,23 +11,33 @@ var d = new Date();
 var time = d.getTime();
 var timeM = time;
 
+//load options from cookies
+loadOptions();
+
 
 var ros = new ROSLIB.Ros({
     url: 'ws://130.192.163.189:9090'
 });
 
-topic=new String(document.getElementById("inputPose").value)
+var gpsTopicName =document.getElementById("inputGps").value
+if(gpsTopicName=='')
+    gpsTopicName='/gps_topic' // default topic name
+var magnetometerTopicName =document.getElementById("inputMagnetometer").value
+if(magnetometerTopicName=='')
+    magnetometerTopicName='/magnetometer_topic' // default topic name
+
+
 // Subscribing to a Topic
 // ----------------------
 var navSatFixListener = new ROSLIB.Topic({
     ros: ros,
-    name: 'drdre/gps_fix', //topic name
+    name: gpsTopicName, //topic name
     messageType: 'sensor_msgs/NavSatFix' //message Type
 });
 
 var magneticFieldListener = new ROSLIB.Topic({
     ros: ros,
-    name: 'drdre/magnetometer', //topic name
+    name: magnetometerTopicName, //topic name
     messageType: 'sensor_msgs/MagneticField' //message Type
 });
 
@@ -87,3 +97,4 @@ magneticFieldListener.subscribe(function(message) {
         headingDegrees = Math.atan2(message.magnetic_field.y, message.magnetic_field.x) * 180 / Math.PI;
     }
 });
+
