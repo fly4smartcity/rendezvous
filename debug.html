@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+
+	<!-- main CSS -->
+	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
+
+	<!-- jQuery -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<!-- Flat UI Bootstrap -->
+	<link href="vendors/flat-ui/css/flat-ui.css" rel="stylesheet">
+	<!-- ROS JS -->
+	<script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+	<script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+	<!-- Cookies functions -->
+	<script type="text/javascript" src="resources/js/cookies.js"></script>
+
+	<title> - Rendezvous - Debug page</title>
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-default navbar-inverse" role="navigation">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+			</button>
+			<a class="navbar-brand" href="index.html">RendezVous</a>
+		</div>
+
+		<div class="collapse navbar-collapse" id="navbar-collapse-3">
+ 			<ul class="nav navbar-nav">
+				<li><a href="debug.html">Debug</a></li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a data-toggle="modal" data-target="#settingsModal"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+				<li><a data-toggle="modal" data-target="#aboutModal"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<!-- Settings Modal -->
+	<div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h5 class="modal-title" id="settingsModalLabel">RendezVous Settings</h5>
+				<!--<ul class="nav nav-pills nav-justified">
+						<li><a href="#settingsROS" data-toggle="tab">ROS</a></li>
+						<li><a href="#settingsCharts" data-toggle="tab">Charts</a></li>
+						<li><a href="#settingsVideo" data-toggle="tab">Video</a></li>
+					</ul>-->
+				</div><!-- modal-header -->
+
+				<div class="modal-body">
+
+				<!--<div class="tab-content">
+				<div class="tab-pane" id="settingsROS"> --> <!-- Tabbed interface, implement if the number of total options grows too much -->
+					<h6> Topics and Messages </h6>
+					<form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="rosMasterURI" class="col-sm-2 control-label">ROS Master URI</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control" id="rosMasterURI" placeholder="http://localhost:11311">
+                            </div>
+                        </div>
+						<div class="form-group">
+							<label for="inputPose" class="col-sm-2 control-label">Pose</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="inputPose" placeholder="/pose_topic">
+							</div>
+							<div class="col-sm-3">
+								<input type="checkbox" checked data-toggle="switch" id="poseSwitch" state="false" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputGps" class="col-sm-2 control-label">GPS</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="inputGps" placeholder="/gps_topic">
+							</div>
+							<div class="col-sm-3">
+								<input type="checkbox" checked data-toggle="switch" id="gpsSwitch" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputMagnetometer" class="col-sm-2 control-label">Mag</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="inputMagnetometer" placeholder="/magnetometer_topic">
+							</div>
+							<div class="col-sm-3">
+								<input type="checkbox" checked data-toggle="switch" id="magnetometerSwitch" />
+							</div>
+						</div>
+					</form>
+					<h6> Video </h6>
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="videoUrl" class="col-sm-2 control-label">mjpeg URL</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="videoUrl" placeholder="http://localhost:8080/stream?topic=/camera_node/image_raw">
+							</div>
+							<div class="col-sm-3">
+								<input type="checkbox" checked data-toggle="switch" id="videoSwitch" />
+							</div>
+						</div>
+					</form>
+					<h6> Map </h6>
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="mapCoords" class="col-sm-2 control-label">GPS location</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="mapCoords" placeholder="47.413157, 8.548645">
+							</div>
+						</div>
+					</form>
+				<!--</div>
+
+						<div class="tab-pane" id="settingsCharts">
+							<h6> Charts Settings </h6>
+						</div>
+
+						<div class="tab-pane" id="settingsVideo">
+							<h6> Video Settings </h6>
+						</div>
+
+					</div> --> <!-- tab-content -->
+				</div><!-- modal-body -->
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="defaultOptions()">Reset to default</button>
+					<button type="button" class="btn btn-primary" onclick="saveOptions()">Save changes</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>	<!-- /Settings Modal -->
+
+	<!-- About Modal -->
+	<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h5 class="modal-title" id="settingsModalLabel">About Rendezvous</h5>
+
+				</div><!-- modal-header -->
+
+				<div class="modal-body">
+					<p>
+						<small>
+							<strong>Rendezvous</strong> is a simple web-based GUI that runs in your browser and displays the position of your device/robot on a global map in real time.
+						</small>
+					</p>
+
+					<p>
+						<small>
+							RV supports the <a href="http://www.ros.org/">ROS</a> standard messages and has been created by:
+							<ul>
+								<li><a href="mailto:gabriele.ermacora@polito.it">Gabriele Ermacora</a> </li>
+								<li><a href="mailto:stefano.rosa@polito.it">Stefano Rosa</a> </li>
+								<li><a href="mailto:antonio.toma@polito.it">Antonio Toma</a> </li>
+							</ul>
+
+							feel free to contact us for info and/or if you want to actively contribute to the project.
+						</small>
+					</p>
+
+					<p>
+						<small>
+							Randezvous uses the following third part libraries:
+							<ul>
+								<li><a href="http://getbootstrap.com/">Bootstrap</a></li>
+								<li><a href="http://jquery.com/">jQuery</a></li>
+								<li><a href="https://github.com/RobotWebTools/roslibjs">RosLibjs</a></li>
+								<li><a href="https://github.com/designmodo/Flat-UI">Bootstrap Flat UI</a></li>
+								<li><a href="https://github.com/sebmatton/jQuery-Flight-Indicators">Flight Indicators</a></li>
+							</ul>
+						</small>
+					</p>
+				</div><!-- modal-body -->
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+				</div>
+			</div>
+		</div>
+	</div>  <!-- /About Modal -->
+
+	<div class="container-fluid">
+	
+		<div class="row">
+			<div>
+				<h5>Ros Topics</h5>
+
+			</div>
+			<hr>
+			<div>
+				<h5>Loaded Options</h5>
+				
+			</div>
+		</div> <!-- 1st row -->
+
+	</div> <!-- container -->
+
+	<!-- jQuery and JavaScript plugins -->
+	<script src="http://code.jquery.com/jquery.js"></script>
+	<!-- Ros listener -->
+	<script type="text/javascript" src="resources/js/subscriber_ros_gui.js"></script>
+	<!-- Ros publisher -->
+	<!-- <script type="text/javascript" src="resources/js/publisher_gui_ros.js"></script> -->
+	<!-- Importing jQuery library -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	<!-- Flat UI Bootstrap -->
+	<script src="vendors/flat-ui/plugin.jquery/flat-ui.min.js"></script>
+	<script src="resources/js/flat-ui_application.js"></script>
+
+</body>
+</html>

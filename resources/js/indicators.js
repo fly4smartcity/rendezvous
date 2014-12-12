@@ -1,34 +1,29 @@
-// Dynamic examples
-var attitude = $.flightIndicator('#attitude', 'attitude', {showBox: false, roll:50, pitch:-20, size:200, img_directory : 'vendors/flightindicators/img/'});
-var heading = $.flightIndicator('#heading', 'heading', {showBox: false, heading:150, img_directory : 'vendors/flightindicators/img/'});
-var variometer = $.flightIndicator('#variometer', 'variometer', {showBox: false, vario:-5, img_directory : 'vendors/flightindicators/img/'});
-var airspeed = $.flightIndicator('#airspeed', 'airspeed', {showBox: false, img_directory : 'vendors/flightindicators/img/'});
-var altimeter = $.flightIndicator('#altimeter', 'altimeter', {showBox: false, img_directory : 'vendors/flightindicators/img/'});
+function initFlightIndicators() {
+    var attitude = $.flightIndicator('#attitude', 'attitude', {showBox: false, roll:50, pitch:-20, size:200, img_directory : 'vendors/flightindicators/img/'});
+    var heading = $.flightIndicator('#heading', 'heading', {showBox: false, heading:150, img_directory : 'vendors/flightindicators/img/'});
+    var variometer = $.flightIndicator('#variometer', 'variometer', {showBox: false, vario:-5, img_directory : 'vendors/flightindicators/img/'});
+    var airspeed = $.flightIndicator('#airspeed', 'airspeed', {showBox: false, img_directory : 'vendors/flightindicators/img/'});
+    var altimeter = $.flightIndicator('#altimeter', 'altimeter', {showBox: false, img_directory : 'vendors/flightindicators/img/'});
 
-// Update at 20Hz
-var increment = 0;
-setInterval(function() {
+    setInterval(function() {
     // Attitude update
-    attitude.setRoll(30*Math.sin(increment/10));
-    attitude.setPitch(50*Math.sin(increment/20));
+    attitude.setRoll(0);
+    attitude.setPitch(0);
 
     // Heading update
-    if (initOk == true) {
-        heading.setHeading(headingDegrees);
-    }
+    heading.setHeading(headingDegrees);
 
     // Vario update
-    variometer.setVario(2*Math.sin(increment/10));
+    variometer.setVario(0);
 
     // Airspeed update
-    airspeed.setAirSpeed(80+80*Math.sin(increment/10));
+    airspeed.setAirSpeed(0);
 
     // Altimeter update
-    altimeter.setAltitude(10*increment);
-    altimeter.setPressure(1000+3*Math.sin(increment/50));
-    increment++;
-}, 50);
-
+    altimeter.setAltitude(0);
+    altimeter.setPressure(0);
+    }, 50);
+}
 
 // convert quaterion to roll,pitch,yaw. Return RPY as an array
 function GetEulerAngles(x,y,z,w)

@@ -5,21 +5,7 @@ var oldCurrentPosition = Array();
 var arrowAngle = 0;
 var arrowIcon;
 
-function initialize() {
-    var starting = new google.maps.LatLng(47.413157, 8.548645); //Zurich
-
-    var mapOptions = {
-        center: starting,
-        zoom: 18,
-        mapTypeId: 'satellite'
-    };
-
-    map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-    map.setTilt(0); //disable 45° view
-
-}
-
-function initialize(lat,lng) {
+function initMap(lat,lng) {
     var starting = new google.maps.LatLng(lat, lng); //Zurich
 
     var mapOptions = {
@@ -35,7 +21,7 @@ function initialize(lat,lng) {
 
 function putHome(lat, lng) {
     var position = new google.maps.LatLng(lat, lng);
-    var Home = 'images/homeMarker.png';
+    var Home = 'resources/images/homeMarker.png';
 
     var markerHome = new google.maps.Marker({
         position: position,
