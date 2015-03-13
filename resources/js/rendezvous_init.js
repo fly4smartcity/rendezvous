@@ -21,8 +21,8 @@ var videoUrl;
 
 function rv_init() {
     initFlightIndicators();
+   	loadOptions();
 	initRosSubscriber();
-	loadOptions();
     initMap(mapHome.lat,mapHome.lon);
     startRosSubscriber();
 }
