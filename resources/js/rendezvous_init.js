@@ -3,6 +3,7 @@ var DEFAULT_MAP_HOME = {
     lon: 8.548645
 };
 
+var DEFAULT_ROS_MASTER_URI='ws://localhost:9090';
 var DEFAULT_GPS_TOPIC ='/gps_topic';
 var DEFAULT_MAG_TOPIC ='/magnetometer_topic';
 var DEFAULT_POSE_TOPIC ='/pose_topic'; // to be implemented

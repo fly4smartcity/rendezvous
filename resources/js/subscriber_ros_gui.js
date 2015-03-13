@@ -11,11 +11,19 @@ var timeM = time;
 var gpsTopicName;
 var magnetometerTopicName;
 
-var ros = new ROSLIB.Ros({
-    url: 'ws://localhost:9090'
-});
+var ros;
+
 
 function initRosSubscriber() {
+        // connect to rosbridge
+    var rosMasterURI = document.getElementById("rosMasterURI").value
+        if (rosMasterURI == '')
+            rosMasterURI = DEFAULT_ROS_MASTER_URI
+        alert(rosMasterURI)
+    ros = new ROSLIB.Ros({
+        url: rosMasterURI
+    });
+
     gpsTopicName = document.getElementById("inputGps").value
     if (gpsTopicName == '')
         gpsTopicName = DEFAULT_GPS_TOPIC // default topic name
